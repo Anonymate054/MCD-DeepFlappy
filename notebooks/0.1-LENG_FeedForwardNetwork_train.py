@@ -6,6 +6,7 @@ import pickle
 import os
 import fs
 MODELS_DIR = fs.open_fs("../models")
+CONFIG_FILES_DIR = fs.open_fs("config_files/")
 
 def eval_genomes(genomes, config):
     env = gym.make("FlappyBird-v0", use_lidar=True)
@@ -72,6 +73,7 @@ def run_neat(config_path, genome_filename=None):
     print(f"El mejor genoma ha sido guardado en '{filename}'.")
 
 if __name__ == "__main__":
-    config_path = "config-feedforward.txt"
+    # config_path = "config-feedforward.txt"
+    config_path = CONFIG_FILES_DIR.getsyspath("config-feedforward_01.txt")
     best_genome_filename = MODELS_DIR.getsyspath("best_genome_2285.pkl")
     run_neat(config_path, best_genome_filename)
