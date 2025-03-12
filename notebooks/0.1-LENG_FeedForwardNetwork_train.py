@@ -66,7 +66,7 @@ def run_neat(config_path, genome_filename=None):
 
     # Guardar el nuevo mejor genoma
     genome_key = str(best_genome.key)
-    filename = f"best_genome_{genome_key}.pkl"
+    filename = MODELS_DIR.getsyspath(f"best_genome_{genome_key}.pkl")
     with open(filename, "wb") as f:
         pickle.dump(best_genome, f)
 

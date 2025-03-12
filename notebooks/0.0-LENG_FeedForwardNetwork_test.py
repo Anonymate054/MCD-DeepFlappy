@@ -91,5 +91,5 @@ if __name__ == "__main__":
     # run_neat(config_path)
 
     # Opción 2: Cargar el mejor genoma guardado y ejecutarlo
-    best_genome_filename = MODELS_DIR.getsyspath("best_genome_23138.pkl") 
+    best_genome_filename = MODELS_DIR.getsyspath("best_genome_2392.pkl") 
     load_and_run_best_genome(config_path, best_genome_filename)
