@@ -10,7 +10,7 @@ CONFIG_FILES_DIR = fs.open_fs("config_files/")
 def eval_genomes(genomes, config):
     """Función de evaluación de genomas durante la evolución."""
     # env = gym.make("FlappyBird-v0", use_lidar=True)
-    env = gym.make("FlappyBird-v0", render_mode="human", use_lidar=True)
+    env = gym.make("FlappyBird-v0", render_mode="human", use_lidar=False)
 
 
     for genome_id, genome in genomes:
@@ -20,7 +20,7 @@ def eval_genomes(genomes, config):
 
         done = False
         while not done:
-            obs = observation[:180]  
+            obs = observation[:12]  
             action_prob = net.activate(obs)  # Predicción de la red
             action = 1 if action_prob[0] > 0.5 else 0  # Salta si la salida > 0.5
 
@@ -70,12 +70,12 @@ def load_and_run_best_genome(config_path, filename):
     # Crear la red neuronal a partir del mejor genoma
     net = neat.nn.FeedForwardNetwork.create(best_genome, config)
 
-    env = gym.make("FlappyBird-v0", render_mode="human", use_lidar=True)
+    env = gym.make("FlappyBird-v0", render_mode="human", use_lidar=False)
     observation, _ = env.reset()
     
     done = False
     while not done:
-        obs = observation[:180]
+        obs = observation
         action_prob = net.activate(obs)  # Predicción de la red
         action = 1 if action_prob[0] > 0.5 else 0  # Salta si la salida > 0.5
 
@@ -86,10 +86,10 @@ def load_and_run_best_genome(config_path, filename):
 
 if __name__ == "__main__":
     # config_path = "config-feedforward.txt"
-    config_path = CONFIG_FILES_DIR.getsyspath("config-feedforward_01.txt")
+    config_path = CONFIG_FILES_DIR.getsyspath("config-feedforward_02.txt")
     # Opción 1: Entrenar y guardar el mejor genoma
     # run_neat(config_path)
 
     # Opción 2: Cargar el mejor genoma guardado y ejecutarlo
-    best_genome_filename = MODELS_DIR.getsyspath("best_genome_2285.pkl") 
+    best_genome_filename = MODELS_DIR.getsyspath("best_genome_2392.pkl") 
     load_and_run_best_genome(config_path, best_genome_filename)
